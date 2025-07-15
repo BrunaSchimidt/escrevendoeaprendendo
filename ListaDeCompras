@@ -1,0 +1,39 @@
+import os
+
+lista = []
+
+while True: #mantem o codigo funcionando no modo loop
+    print('Selecione o que deseja fazer na lista:') #mostra na tela o texto
+    opcao = input('[i]nserir [a]pagar [l]istar: ') #opção se torna i, a ou l
+
+    if opcao == 'i':#se opção for igual a i
+        os.system('cls')#apagar tela
+        valor = input('Item que deseja colocar: ')#valor = o que a pessoa digitar
+        lista.append(valor)
+        print('você adicionou:', valor,'na lista de compras!')
+    elif opcao == 'a':#se a for a opção igual 'a'
+        indice_str = input(#escolher opção a remover
+            'Escolha o item para apagar: '
+        )
+
+        try:
+            indice = int(indice_str)#escolher em numeros qual item quer remover
+            del lista[indice]#comando deletar da lista a opção escolhida do indice.
+            print('Você apagou',indice, 'da sua lista de compras!')
+        except ValueError:
+            print('Por favor digite número.')
+        except IndexError:
+            print('Item não existe na lista')
+        except Exception:
+            print('Erro desconhecido')
+    elif opcao == 'l': # se a opção 'l'
+        os.system('cls')#apagar tela
+
+        if len(lista) == 0: #se a lista for igual 0, não tem nada;
+            print('Nada adicionado na lista')
+
+        for i, valor in enumerate(lista):
+            print('Nome do produto na lista:')
+            print(i, valor)
+    else:
+        print('Por favor, escolha i, a ou l.')
