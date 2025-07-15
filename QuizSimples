@@ -1,0 +1,50 @@
+#exercicio - sistema de perguntas e respostas
+import os #importa a opção os que apaga tudo da tela.
+
+perguntas = [
+    {
+        'Pergunta': 'Como é Céu em inglês?',
+        'Opções': ['Cries', 'Blue', 'kay', 'Sky'],
+        'Resposta': 3,
+    },
+    {
+        'Pergunta': 'Como é Porta em inglês?',
+        'Opções': ['Boor', 'Thron', 'Drorn', 'Door'],
+        'Resposta': 3,
+    },
+    {
+        'Pergunta': 'Como é Lixo em inglês?',
+        'Opções': ['Trish', 'taxs', 'lix', 'Trash'],
+        'Resposta': 3,
+    },
+]
+
+def quiz_perguntas(): #definindo uma string com nome de quiz_perguntas.
+    pontuacao = 0 #iniciando a pontuação como 0.
+
+    for pergunta in perguntas:#por cada pergunta em perguntas
+        print('🤔', pergunta['Pergunta'])#aparece na tela a pergunta , da lista ' perguntas'
+        print()
+
+        for i, opcao in enumerate(pergunta['Opções']):#
+            print(f'{i}) {opcao}')
+        
+        try:
+            resposta = int(input('\nDigite o número correspondente à alternativa correta: '))
+        except ValueError:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print('⚠️ Entrada inválida! Responda com o número da alternativa.')
+            continue
+
+        os.system('cls' if os.name == 'nt' else 'clear')
+
+        if resposta == pergunta['Resposta']:
+            print('✅ Parabéns, você acertou! 😄\n')
+            pontuacao += 1
+        else:
+            correta = pergunta['Opções'][pergunta['Resposta']]
+            print(f'❌ Você errou! 😢 A resposta correta era: "{correta}".\n')
+
+    print(f'🏁 Fim do quiz! Sua pontuação foi de {pontuacao} ponto(s). 🏆')
+
+quiz_perguntas()
