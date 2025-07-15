@@ -1,0 +1,7 @@
+nome_usuario = input("Digite o seu nome: ")
+contador = 0 #Primenra letra do nome digitado.
+nova_string = ""
+while contador != len(nome_usuario):# em quanto a posição 0 do nome ser diferente do tamanho do nome
+    nova_string += "*" + nome_usuario[contador] #Acrescentando * a cada letra baseada no contador.
+    contador += 1 #inserindo +1 posição. se estava no 0 foi para 1.
+print(nova_string)
