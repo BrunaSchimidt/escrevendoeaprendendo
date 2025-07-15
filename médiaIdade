@@ -1,0 +1,17 @@
+nome = input('digite o nome da primeira pessoa: ')
+nome_2 = input('digite o nome da segunda pessoa: ')
+idade = input('digite a idade da primeira pessoa: ')
+idade_2 = input('Digite a idade da segunda pessoa: ')
+idade = float(idade)
+idade_2 = float(idade_2)
+
+media = (idade + idade_2) / 2
+media = f'{media:.1f}'
+
+print('Dados da primeira pessoa:')
+print('Nome:', nome)
+print('idade:', idade)
+print('Dados da segunda pessoa:')
+print('Nome:', nome_2)
+print('Idade da segunda pessoa:', idade_2)
+print(f'A idade média de', nome,'e', nome_2,'é de:',media,'Anos')
