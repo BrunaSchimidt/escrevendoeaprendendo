@@ -1,0 +1,13 @@
+min_usuario = int(input('Digite a quantidade de minutos utilizados: '))
+
+valor = 50.00
+
+if min_usuario > 100:
+    excedente = min_usuario - 100 # excedente = minuto que a pessoa ficou -100
+    total = valor + (excedente * 2.00) # total =  50 + excedente x 2
+    
+
+else:
+    total = valor
+
+print(f'Valor a pagar: R$ {total:.2f}')
