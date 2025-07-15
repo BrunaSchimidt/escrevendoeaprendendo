@@ -1,0 +1,12 @@
+valor_unitario = int(input('valor do produto: '))
+quantidade = int(input('Quantidade adquirida: '))
+
+valor_final = valor_unitario * quantidade
+print('Total:', valor_final)
+dinheiro_recebido = int(input('Valor recebido: '))
+troco = abs(valor_final - dinheiro_recebido)
+if dinheiro_recebido < valor_final:
+    dinheiro_faltante = abs(dinheiro_recebido - valor_final)
+    print('Dinheiro insuficiente, ''Faltam:',dinheiro_faltante)
+else:
+    print('Troco cliente:',troco)
