@@ -1,0 +1,17 @@
+nome = input('Digite seu nome: ')
+idade = input('Digite sua idade: ')
+
+if nome and idade:
+    print(f'Seu nome é: {nome}')
+    print('Seu nome inverido é: ',nome[::-1])
+    print('Seu nome contém:',len(nome), 'Caracteres.')
+    print('A primeira letra do seu nome é:', nome[0] )
+    print('A ultima letra do seu nome é:',nome[len(nome)-1])
+    if " " in nome:
+        print('Seu nome contem espaços')
+    else:
+        print('Seu nome não contém espaços.')
+
+
+else:
+    print('Desculpe você deixou o campo vazio')
