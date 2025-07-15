@@ -1,0 +1,18 @@
+salario = float(input('Digite o salario atual: R$ '))
+
+if salario <= 1000:
+    porcento = 20
+elif salario <= 3000:
+    porcento = 15
+elif salario <= 8000:
+    porcento = 10
+else:
+    porcento = 5
+
+aumento = salario * (porcento /100)
+
+novo_salario = salario + aumento
+
+print(f'Novo salário: R$ {novo_salario:.2f}')
+print(f'Aumento ganho: R$ {aumento:.2f}')
+print(f'Porcentagem de aumento: {porcento}%')
