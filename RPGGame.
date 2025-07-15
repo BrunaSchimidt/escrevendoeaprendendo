@@ -1,0 +1,127 @@
+import random
+
+# --------------------------- CONFIGURABLE DATA ---------------------------
+PLAYER_MAX_HP   = 100        # Vida máxima do jogador
+POTION_HEAL     = 30         # Quanto cada poção cura
+POTIONS_START   = 3          # Poções iniciais
+
+ENEMIES_DATA = [
+    {"name": "Slime",        "hp": 20,  "atk_min": 3,  "atk_max": 7},
+    {"name": "Goblin",       "hp": 35,  "atk_min": 5,  "atk_max": 10},
+    {"name": "Orc",          "hp": 50,  "atk_min": 8,  "atk_max": 14},
+    {"name": "Dragão",       "hp": 120, "atk_min": 10, "atk_max": 20},
+    {"name": "CHEFÃO FINAL", "hp": 180, "atk_min": 12, "atk_max": 25},
+]
+
+# --------------------------- GENERATOR -----------------------------------
+
+def gerar_inimigos():
+    """Entrega (yield) um inimigo por vez, na ordem definida em ENEMIES_DATA."""
+    for dados in ENEMIES_DATA:
+        inimigo = dados.copy()        # cópia para não alterar dados base
+        inimigo["hp_atual"] = inimigo["hp"]
+        yield inimigo
+    yield {"name": "FIM"}           # marcador para encerrar o jogo
+
+# --------------------------- FUNÇÕES AUXILIARES --------------------------
+
+def dano_aleatorio(atk_min: int, atk_max: int) -> int:
+    """Retorna um dano inteiro aleatório dentro da faixa."""
+    return random.randint(atk_min, atk_max)
+
+
+def mostrar_status(player_hp: int, potions: int, inimigo: dict) -> None:
+    """Exibe a HUD do combate."""
+    print("-" * 50)
+    print(f"💚 Vida: {player_hp}/{PLAYER_MAX_HP} | 🧪 Poções: {potions}")
+    if inimigo.get("hp_atual") is not None:  # não mostra para o marcador FIM
+        print(f"👾 {inimigo['name']} – HP: {inimigo['hp_atual']}/{inimigo['hp']}")
+    print("-" * 50)
+
+# --------------------------- COMBATE -------------------------------------
+
+def loop_combate(player_hp: int, potions: int, inimigo: dict):
+    """Lida com o combate contra *um* inimigo.
+
+    Retorna:
+        player_hp (int): vida restante do jogador
+        potions   (int): quantidade de poções após o combate
+        fugiu     (bool): True se o jogador escapou
+    """
+    fugiu = False
+
+    while inimigo["hp_atual"] > 0 and player_hp > 0:
+        mostrar_status(player_hp, potions, inimigo)
+        acao = input("[A]tacar | [P]oção | [F]ugir » ").strip().lower()
+
+        if acao == "a":
+            dano_jogador = dano_aleatorio(8, 15)
+            inimigo["hp_atual"] = max(0, inimigo["hp_atual"] - dano_jogador)
+            print(f"💥 Você causou {dano_jogador} de dano!")
+
+        elif acao == "p":
+            if potions > 0:
+                player_hp = min(PLAYER_MAX_HP, player_hp + POTION_HEAL)
+                potions -= 1
+                print(f"🧪 Você usou uma poção e recuperou {POTION_HEAL} HP!")
+            else:
+                print("⚠️  Você não possui poções!")
+                continue  # turno não conta, inimigo não ataca
+
+        elif acao == "f":
+            if random.random() < 0.5:
+                print("🏃 Você conseguiu fugir!")
+                fugiu = True
+                break
+            else:
+                print("🚫 A fuga falhou!")
+        else:
+            print("❓ Comando inválido.")
+            continue  # não consome turno
+
+        # Ataque do inimigo (se ainda vivo e o jogador não fugiu)
+        if inimigo["hp_atual"] > 0 and not fugiu:
+            dano_inimigo = dano_aleatorio(inimigo["atk_min"], inimigo["atk_max"])
+            player_hp -= dano_inimigo
+            print(f"👾 {inimigo['name']} causou {dano_inimigo} de dano!")
+
+    return player_hp, potions, fugiu
+
+# --------------------------- LOOP PRINCIPAL ------------------------------
+
+def jogar():
+    print("\n=== RPG COM YIELD ===\nDerrote todos os inimigos ou morra tentando!\n")
+
+    player_hp = PLAYER_MAX_HP
+    potions   = POTIONS_START
+
+    for inimigo in gerar_inimigos():
+        if inimigo["name"] == "FIM":
+            print("\n🎉 Você sobreviveu a todos os desafios! Fim do jogo.")
+            break
+
+        print(f"\n👾 Um {inimigo['name']} aproxima‑se!")
+        player_hp, potions, fugiu = loop_combate(player_hp, potions, inimigo)
+
+        if player_hp <= 0:
+            print("\n💀 Você foi derrotado! Game Over.")
+            break
+
+        if fugiu:
+            print(f"\n⚠️ Você escapou do {inimigo['name']}. Ele ainda está à solta!")
+            # opcional: reinserir inimigo mais tarde ou pular para o próximo
+            continue
+
+        # Vitória contra o inimigo
+        print(f"\n✨ {inimigo['name']} foi derrotado! Vida restante: {player_hp} HP.")
+
+        # Chance de drop de poção (30 %)
+        if random.random() < 0.3:
+            potions += 1
+            print("🧪 Você encontrou uma poção no corpo do inimigo!")
+
+    print("\nObrigado por jogar!")
+
+
+if __name__ == "__main__":
+    jogar()
