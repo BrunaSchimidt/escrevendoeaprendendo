@@ -1,0 +1,10 @@
+nome = input('Qual seu nome: ')
+valor_horas = input('Quanto ganha por hora: ')
+h_trabalhadas = input('Horas trabalhadas: ')
+
+valor_horas = int(valor_horas)
+h_trabalhadas = int(h_trabalhadas)
+
+total = valor_horas * h_trabalhadas
+total = f'{total:.1f}'
+print('O pagamento para',nome,'Deve ser de:', total)
