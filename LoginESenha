@@ -1,0 +1,16 @@
+senha_usuario = "abacate"
+
+senha_digitada = input('Digite sua senha: ')
+qtd_tentativas = 5
+tentativa = 1
+
+while senha_digitada != senha_usuario and tentativa != qtd_tentativas:
+    print('Senha incorreta, tente novamente!')
+    print('você tem mais',qtd_tentativas - tentativa)
+    senha_digitada = input('Digite sua senha: ')
+    tentativa += 1
+    
+if tentativa == qtd_tentativas:
+    print('Senha Bloqueada, entre em contato com o suporte!')
+else:
+    print('Você entrou!')
