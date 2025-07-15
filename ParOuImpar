@@ -1,0 +1,11 @@
+numero = (input('Digite um número inteiro: '))
+
+if numero.isdigit():
+    numero = int(numero)
+
+    if numero %2 == 0:
+        print('O número é PAR!')
+    else:
+        print('O número é IMPAR!')
+else:
+    print('Digite um número válido!')
