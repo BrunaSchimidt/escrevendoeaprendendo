@@ -1,0 +1,10 @@
+inicio = input('Hora de inicio: ')
+termino = input('hora final: ')
+
+inicio = int(inicio)
+termino = int(termino)
+
+print('Você iniciou as:', inicio, 'horas')
+print('E acabou as:', termino, 'horas')
+total = inicio + termino
+print('O partida durou:', total, 'horas')
