@@ -1,0 +1,12 @@
+glicose = input('coloque sua glicose aqui: ')
+glicose = float(glicose)
+normal = 100
+elevado = 140
+diabetes = 200
+
+if glicose <= normal:
+    print('Glicose normal!')
+elif glicose > normal and glicose <= elevado:
+        print('Glicose Elevada!')
+else:
+      print('Diabetes') 
