@@ -1,0 +1,20 @@
+quantidade = int(input('Quantos numeros você vai digitar?: '))
+
+lista = []
+
+for i in range(quantidade):
+    numero = float(input('Digite um numero: '))
+    lista.append(numero)
+
+print('Valores:',end='')
+
+for numero in lista:
+    print(f'{numero:.1f}', end=' ')
+
+print()
+
+soma = sum(lista)
+media = soma / quantidade
+
+print(f'Soma = {soma:.2f}')
+print(f'Média = {media:.2f}')
