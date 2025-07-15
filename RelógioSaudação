@@ -1,0 +1,11 @@
+hora_atual = int(input('Que horas é agora?: '))
+
+
+if (hora_atual >= 0) and (hora_atual <= 11):
+    print('Bom dia usuario!')
+elif (hora_atual >= 12) and (hora_atual <= 17):
+    print('Boa tarde Usuario!')
+elif (hora_atual >= 18) and (hora_atual <= 23):
+    print('Boa noite Usuario!!')
+else:
+    print('Digite uma hora válida!')
