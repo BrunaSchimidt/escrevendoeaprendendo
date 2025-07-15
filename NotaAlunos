@@ -1,0 +1,8 @@
+nota_1 = float(input('Digite a primeira nota adquirida: '))
+nota_2 = float(input('Digite a Segunda nota adquirida: '))
+nota_final = nota_1 + nota_2
+
+if nota_final < 60.00:
+    print(f'Nota Final:', nota_final,'Reprovado')
+else:
+    print('Nota final:',nota_final,'Aprovado!')
